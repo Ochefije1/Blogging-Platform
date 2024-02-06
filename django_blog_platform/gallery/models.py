@@ -1,8 +1,6 @@
 from django.db import models
 
 # Create your models here.
-from django.db import models
- 
 class Product(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField()
@@ -10,6 +8,9 @@ class Product(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
  
+    class Meta:
+            app_label = 'gallery'
+        
     def __str__(self):
         return self.name
  
@@ -25,7 +26,7 @@ class Product(models.Model):
         words = self.description.split()
         if len(words) > 50:
             # Join the first 50 words and add "..." at the end
-            return ' '.join(words[:30]) + '...'
+            return ' '.join(words[:50]) + '...'
         else:
             # If the description is already less than 50 words, return it as is
             return self.description
